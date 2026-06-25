@@ -127,6 +127,64 @@ body {
   color: var(--danger);
 }
 
+.qr-result-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.qr-result {
+  width: min(100%, 520px);
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+}
+
+.qr-output {
+  width: min(100%, 420px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgb(21 21 21 / 8%);
+}
+
+.qr-output svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.qr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.qr-actions a {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.qr-actions a:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
 @media (max-width: 760px) {
   .qr-page {
     place-items: start;

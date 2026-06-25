@@ -1,31 +1,54 @@
 class QrcodesController < ApplicationController
+  skip_forgery_protection only: :create
+
   def new
   end
 
   def show
-    render_qrcode(params[:text])
+    @text = params[:text].to_s
+    @svg = QrCodeGenerator.call(@text)
+
+    if raw_svg_request?
+      send_svg(@svg)
+    else
+      render :result
+    end
+  rescue QrCodeGenerator::Error => e
+    render plain: e.message, status: :unprocessable_entity
   end
 
   def create
-    render_qrcode(params[:text])
+    @text = params[:text].to_s
+    @svg = QrCodeGenerator.call(@text)
+
+    if preview_request?
+      render :result
+    else
+      send_svg(@svg)
+    end
+  rescue QrCodeGenerator::Error => e
+    if preview_request?
+      flash.now[:alert] = e.message
+      render :new, status: :unprocessable_entity
+    else
+      render plain: e.message, status: :unprocessable_entity
+    end
   end
 
   private
 
-  def render_qrcode(text)
-    svg = QrCodeGenerator.call(text)
-
+  def send_svg(svg)
     send_data svg,
       filename: "qrcode.svg",
       type: "image/svg+xml",
       disposition: "inline"
-  rescue QrCodeGenerator::Error => e
-    respond_to do |format|
-      format.html do
-        flash.now[:alert] = e.message
-        render :new, status: :unprocessable_entity
-      end
-      format.any { render plain: e.message, status: :unprocessable_entity }
-    end
+  end
+
+  def raw_svg_request?
+    request.format.svg? || request.headers["Accept"].to_s.include?("image/svg+xml")
+  end
+
+  def preview_request?
+    params[:preview].present?
   end
 end

@@ -12,6 +12,7 @@
       <% end %>
 
       <%= form.label :text, "String" %>
+      <%= hidden_field_tag :preview, "1" %>
       <%= form.text_area :text, rows: 6, placeholder: "https://example.com", autofocus: true %>
       <%= form.submit "Create QR code" %>
     <% end %>

@@ -1,0 +1,12 @@
+<main class="qr-result-page">
+  <section class="qr-result">
+    <div class="qr-output" aria-label="Generated QR code">
+      <%= @svg.html_safe %>
+    </div>
+
+    <div class="qr-actions">
+      <%= link_to "Create another", root_path %>
+      <%= link_to "Open SVG", qrcode_path(text: @text), target: "_blank", rel: "noopener" %>
+    </div>
+  </section>
+</main>
