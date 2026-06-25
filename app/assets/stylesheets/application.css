@@ -1,0 +1,144 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+
+:root {
+  color-scheme: light;
+  --bg: #f7f7f2;
+  --ink: #151515;
+  --muted: #60605a;
+  --line: #d8d8cf;
+  --accent: #087e8b;
+  --accent-dark: #055d66;
+  --panel: #ffffff;
+  --danger: #a11d33;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.qr-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+}
+
+.qr-workspace {
+  width: min(100%, 960px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
+  gap: 32px;
+  align-items: center;
+}
+
+.qr-copy h1 {
+  margin: 0;
+  max-width: 10ch;
+  font-size: clamp(48px, 7vw, 84px);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.qr-copy p {
+  max-width: 42ch;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.qr-form {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgb(21 21 21 / 8%);
+}
+
+.qr-form label {
+  font-weight: 700;
+}
+
+.qr-form textarea {
+  width: 100%;
+  min-height: 180px;
+  resize: vertical;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.4;
+}
+
+.qr-form textarea:focus {
+  outline: 3px solid rgb(8 126 139 / 18%);
+  border-color: var(--accent);
+}
+
+.qr-form input[type="submit"] {
+  min-height: 48px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.qr-form input[type="submit"]:hover {
+  background: var(--accent-dark);
+}
+
+.form-error {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid rgb(161 29 51 / 25%);
+  border-radius: 6px;
+  background: rgb(161 29 51 / 8%);
+  color: var(--danger);
+}
+
+@media (max-width: 760px) {
+  .qr-page {
+    place-items: start;
+    padding: 24px;
+  }
+
+  .qr-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .qr-copy h1 {
+    max-width: 12ch;
+    font-size: 48px;
+  }
+}

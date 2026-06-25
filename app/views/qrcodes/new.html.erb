@@ -1,0 +1,19 @@
+<main class="qr-page">
+  <section class="qr-workspace">
+    <div class="qr-copy">
+      <p class="eyebrow">QR code service</p>
+      <h1>Text in. QR code out.</h1>
+      <p>Generate an SVG QR code from any URL, label, or short message.</p>
+    </div>
+
+    <%= form_with url: qrcodes_path, method: :post, class: "qr-form", data: { turbo: false } do |form| %>
+      <% if flash.now[:alert].present? %>
+        <p class="form-error"><%= flash.now[:alert] %></p>
+      <% end %>
+
+      <%= form.label :text, "String" %>
+      <%= form.text_area :text, rows: 6, placeholder: "https://example.com", autofocus: true %>
+      <%= form.submit "Create QR code" %>
+    <% end %>
+  </section>
+</main>
